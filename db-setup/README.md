@@ -3,7 +3,7 @@
 1. Download and extract [Graph Database Self-Managed](https://neo4j.com/deployment-center/) for Windows by choosing the community option **Windows Executable
    Neo4j 5.20.0 (zip)**
 
-2. Navigate to _C:\<NEO4J_PATH>\bin_ directory using Git Bash terminal
+2. Navigate to _C:\\<NEO4J_PATH>\bin_ directory using Git Bash terminal
 
 3. Start Neo4j Server (**KEEP THIS TERMINAL OPPENED**):
 
