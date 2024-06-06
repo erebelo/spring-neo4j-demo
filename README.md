@@ -1,0 +1,29 @@
+# Spring Neo4j Demo
+
+REST API project developed in Java using Spring Boot 3 and Neo4j graph database.
+
+## Requirements
+
+- Java 17
+- Spring Boot 3.3.0
+- Apache Maven 3.8.6
+
+## Run App
+
+- Run the SpringNeo4jDemoApplication class as Java Application
+
+## Collection
+
+[Project Collection](https://github.com/erebelo/spring-neo4j-demo/tree/main/collection)
+
+## DB Setup
+
+[Neo4j Server Setup](https://github.com/erebelo/spring-neo4j-demo/tree/main/db-setup)
+
+## Diagram
+
+[Entity Relationship Diagram](https://github.com/erebelo/spring-neo4j-demo/tree/main/db-setup/Entity%20Relationship%20Diagram.png)
+
+## Script
+
+[Neo4j Demo Script](https://github.com/erebelo/spring-neo4j-demo/tree/main/db-setup/neo4j_demo_script.sql)
