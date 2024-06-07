@@ -11,9 +11,11 @@ import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Relationship;
+import org.springframework.data.neo4j.core.support.UUIDStringGenerator;
 
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 import static org.springframework.data.neo4j.core.schema.Relationship.Direction.INCOMING;
 import static org.springframework.data.neo4j.core.schema.Relationship.Direction.OUTGOING;
@@ -27,8 +29,8 @@ import static org.springframework.data.neo4j.core.schema.Relationship.Direction.
 public class UserNode {
 
     @Id
-    @GeneratedValue
-    private String id;
+    @GeneratedValue(UUIDStringGenerator.class)
+    private UUID id;
 
     private String username;
     private String name;
