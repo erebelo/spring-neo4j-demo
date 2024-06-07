@@ -4,28 +4,28 @@
 CREATE CONSTRAINT FOR (u:User) REQUIRE u.username IS UNIQUE;
 
 -- Create User nodes
-CREATE (e:User {name: "Eduardo", username: "@eduardo"}),
-       (j:User {name: "José", username: "@jose"})
+CREATE (e:User {username: "@eduardo", name: "Eduardo"}),
+       (j:User {username: "@jose", name: "José"})
 RETURN e, j;
 
 -----
 
 -- Creates a Tweet node and associates it to a User node (@eduardo)
-CREATE (t:Tweet {name: "Tweet 1", content: "This is my first tweet!", likes: 0})
+CREATE (t:Tweet {title: "Tweet 1", content: "This is my first tweet!", likes: 0})
 WITH t
 MATCH (u:User {username: "@eduardo"})
 CREATE (u)-[:POSTED {createdAt: datetime()}]->(t)
 RETURN u, t
 
 -- Creates a Tweet node and associates it to a User node (@eduardo)
-CREATE (t:Tweet {name: "Tweet 2", content: "This is my second tweet!", likes: 0})
+CREATE (t:Tweet {title: "Tweet 2", content: "This is my second tweet!", likes: 0})
 WITH t
 MATCH (u:User {username: "@eduardo"})
 CREATE (u)-[:POSTED {createdAt: datetime()}]->(t)
 RETURN u, t
 
 -- Creates a Tweet node and associates it to a User node (@jose)
-CREATE (t:Tweet {name: "Tweet 1", content: "This is my first tweet!", likes: 0})
+CREATE (t:Tweet {title: "Tweet 1", content: "This is my first tweet!", likes: 0})
 WITH t
 MATCH (u:User {username: "@jose"})
 CREATE (u)-[:POSTED {createdAt: datetime()}]->(t)
