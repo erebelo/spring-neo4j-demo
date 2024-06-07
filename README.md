@@ -10,6 +10,7 @@ REST API project developed in Java using Spring Boot 3 and Neo4j graph database.
 
 ## Run App
 
+- Set the following environment variables: 'DB_HOST', 'DB_PORT', 'DB_USERNAME', and 'DB_PASSWORD'
 - Run the SpringNeo4jDemoApplication class as Java Application
 
 ## Collection
