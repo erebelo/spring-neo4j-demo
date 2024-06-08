@@ -81,7 +81,29 @@ public class UserServiceImpl implements UserService {
             user1.getFollowing().add(relationship);
             userRepository.save(user1);
 
-//            followRepository.save(relationship);
+            // this is the only way possible to create the bidirectional relationship, however, it created a new separated node named
+            // FollowRelationship
+            followRepository.save(relationship);
+
+
+//        var user1 = userRepository.findById(id1).orElse(null);
+//        var user2 = userRepository.findById(id2).orElse(null);
+//
+//        if (user1 != null && user2 != null) {
+//            var followRelationship = new FollowRelationship();
+//            followRelationship.setSinceAt(LocalDateTime.now());
+//
+//            followRelationship.setUser(user2);
+//            user1.getFollowing().add(followRelationship);
+//
+//            followRelationship = new FollowRelationship();
+//            followRelationship.setSinceAt(LocalDateTime.now());
+//
+//            followRelationship.setUser(user1);
+//            user2.getFollowers().add(followRelationship);
+//
+//            userRepository.save(user1);
+//            userRepository.save(user2);
         }
     }
 
