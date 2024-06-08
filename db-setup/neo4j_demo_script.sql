@@ -42,6 +42,11 @@ RETURN e, j
 
 -----
 
+-- Fetch by <elementId>
+MATCH (u)
+WHERE elementId(u) = "4:7bd1681f-0d48-4c9c-a7c4-f2d18ea4ba6e:4"
+RETURN u;
+
 -- Delete all
 MATCH (n)
 DETACH DELETE n;
@@ -55,7 +60,7 @@ MATCH (u:User {username: "@eduardo"})
 DETACH DELETE u
 
 -- Deletes one of the associations between two Users (@jose -> @eduardo)
-MATCH (j:User {username: "@jose"})-[f:FOLLOWS]->(e:User {username: "@eduardo"})
+MATCH (j:User {username: "@jose"})-[f:FOLLOW]->(e:User {username: "@eduardo"})
 DELETE f
 RETURN j, e;
 

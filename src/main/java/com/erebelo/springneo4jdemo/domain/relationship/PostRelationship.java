@@ -1,13 +1,12 @@
 package com.erebelo.springneo4jdemo.domain.relationship;
 
-import com.erebelo.springneo4jdemo.domain.node.UserNode;
+import com.erebelo.springneo4jdemo.domain.node.TweetNode;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.neo4j.core.schema.GeneratedValue;
-import org.springframework.data.neo4j.core.schema.Id;
+import org.springframework.data.neo4j.core.schema.RelationshipId;
 import org.springframework.data.neo4j.core.schema.RelationshipProperties;
 import org.springframework.data.neo4j.core.schema.TargetNode;
 
@@ -19,15 +18,14 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @RelationshipProperties
-public class FollowsRelationship {
+public class PostRelationship {
 
-    @Id
-    @GeneratedValue
-    private String id;
+    @RelationshipId
+    private Long id;
 
     @TargetNode
-    private UserNode user;
+    private TweetNode tweet;
 
-    private LocalDateTime sinceAt;
+    private LocalDateTime createdAt;
 
 }

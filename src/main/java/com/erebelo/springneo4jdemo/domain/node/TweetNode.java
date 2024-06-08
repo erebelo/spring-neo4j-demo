@@ -11,8 +11,6 @@ import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Relationship;
 import org.springframework.data.neo4j.core.support.UUIDStringGenerator;
 
-import java.util.UUID;
-
 import static org.springframework.data.neo4j.core.schema.Relationship.Direction.INCOMING;
 
 @Getter
@@ -25,13 +23,13 @@ public class TweetNode {
 
     @Id
     @GeneratedValue(UUIDStringGenerator.class)
-    private UUID id;
+    private String id;
 
     private String title;
     private String content;
     private Integer likes;
 
-    @Relationship(type = "POSTED", direction = INCOMING)
+    @Relationship(type = "POST", direction = INCOMING)
     private UserNode user;
 
 }

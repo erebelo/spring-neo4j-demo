@@ -1,7 +1,7 @@
 package com.erebelo.springneo4jdemo.domain.node;
 
-import com.erebelo.springneo4jdemo.domain.relationship.FollowsRelationship;
-import com.erebelo.springneo4jdemo.domain.relationship.PostedRelationship;
+import com.erebelo.springneo4jdemo.domain.relationship.FollowRelationship;
+import com.erebelo.springneo4jdemo.domain.relationship.PostRelationship;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,9 +13,10 @@ import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Relationship;
 import org.springframework.data.neo4j.core.support.UUIDStringGenerator;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 
 import static org.springframework.data.neo4j.core.schema.Relationship.Direction.INCOMING;
 import static org.springframework.data.neo4j.core.schema.Relationship.Direction.OUTGOING;
@@ -30,18 +31,18 @@ public class UserNode {
 
     @Id
     @GeneratedValue(UUIDStringGenerator.class)
-    private UUID id;
+    private String id;
 
     private String username;
     private String name;
 
-    @Relationship(type = "FOLLOWS", direction = OUTGOING)
-    private Set<FollowsRelationship> following;
+    @Relationship(type = "FOLLOW", direction = OUTGOING)
+    private Set<FollowRelationship> following = new HashSet<>();
 
-    @Relationship(type = "FOLLOWS", direction = INCOMING)
-    private Set<FollowsRelationship> followers;
+    @Relationship(type = "FOLLOW", direction = INCOMING)
+    private Set<FollowRelationship> followers = new HashSet<>();
 
-    @Relationship(type = "POSTED", direction = OUTGOING)
-    private List<PostedRelationship> posts;
+    @Relationship(type = "POST", direction = OUTGOING)
+    private List<PostRelationship> posts = new ArrayList<>();
 
 }
