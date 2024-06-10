@@ -42,11 +42,6 @@ RETURN e, j
 
 -----
 
--- Fetch by <elementId>
-MATCH (u)
-WHERE elementId(u) = "4:7bd1681f-0d48-4c9c-a7c4-f2d18ea4ba6e:4"
-RETURN u;
-
 -- Delete all
 MATCH (n)
 DETACH DELETE n;
@@ -63,5 +58,10 @@ DETACH DELETE u
 MATCH (j:User {username: "@jose"})-[f:FOLLOW]->(e:User {username: "@eduardo"})
 DELETE f
 RETURN j, e;
+
+-- Fetch by <elementId>
+MATCH (u)
+WHERE elementId(u) = "4:7bd1681f-0d48-4c9c-a7c4-f2d18ea4ba6e:4"
+RETURN u;
 
 -----

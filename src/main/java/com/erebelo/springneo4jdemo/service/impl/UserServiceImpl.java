@@ -6,7 +6,6 @@ import com.erebelo.springneo4jdemo.domain.request.UserRequest;
 import com.erebelo.springneo4jdemo.domain.response.UserLazyResponse;
 import com.erebelo.springneo4jdemo.domain.response.UserResponse;
 import com.erebelo.springneo4jdemo.mapper.UserMapper;
-import com.erebelo.springneo4jdemo.repository.FollowRepository;
 import com.erebelo.springneo4jdemo.repository.UserRepository;
 import com.erebelo.springneo4jdemo.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +19,6 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final FollowRepository followRepository;
     private final UserMapper mapper;
 
     @Override
@@ -74,36 +72,18 @@ public class UserServiceImpl implements UserService {
         var user2 = userRepository.findById(id2).orElse(null);
 
         if (user1 != null && user2 != null) {
-            var relationship = new FollowRelationship();
-            relationship.setUser(user2);
-            relationship.setSinceAt(LocalDateTime.now());
+            var followingRelationship = new FollowRelationship();
+            followingRelationship.setSinceAt(LocalDateTime.now());
+            followingRelationship.setUser(user2);
+            user1.getFollowing().add(followingRelationship);
 
-            user1.getFollowing().add(relationship);
+            var followerRelationship = new FollowRelationship();
+            followerRelationship.setSinceAt(LocalDateTime.now());
+            followerRelationship.setUser(user1);
+            user2.getFollowers().add(followerRelationship);
+
             userRepository.save(user1);
-
-            // this is the only way possible to create the bidirectional relationship, however, it created a new separated node named
-            // FollowRelationship
-            followRepository.save(relationship);
-
-
-//        var user1 = userRepository.findById(id1).orElse(null);
-//        var user2 = userRepository.findById(id2).orElse(null);
-//
-//        if (user1 != null && user2 != null) {
-//            var followRelationship = new FollowRelationship();
-//            followRelationship.setSinceAt(LocalDateTime.now());
-//
-//            followRelationship.setUser(user2);
-//            user1.getFollowing().add(followRelationship);
-//
-//            followRelationship = new FollowRelationship();
-//            followRelationship.setSinceAt(LocalDateTime.now());
-//
-//            followRelationship.setUser(user1);
-//            user2.getFollowers().add(followRelationship);
-//
-//            userRepository.save(user1);
-//            userRepository.save(user2);
+            userRepository.save(user2);
         }
     }
 
@@ -111,9 +91,14 @@ public class UserServiceImpl implements UserService {
 //    @Transactional
     public void unfollowUser(String id1, String id2) {
         var user1 = userRepository.findById(id1).orElse(null);
-        if (user1 != null) {
+        var user2 = userRepository.findById(id2).orElse(null);
+
+        if (user1 != null && user2 != null) {
             user1.getFollowing().removeIf(rel -> rel.getUser().getId().equals(id2));
+            user2.getFollowers().removeIf(rel -> rel.getUser().getId().equals(id1));
+
             userRepository.save(user1);
+            userRepository.save(user2);
         }
     }
 }
