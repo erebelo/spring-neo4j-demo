@@ -1,6 +1,5 @@
 package com.erebelo.springneo4jdemo.service.impl;
 
-
 import com.erebelo.springneo4jdemo.domain.relationship.FollowRelationship;
 import com.erebelo.springneo4jdemo.domain.request.UserRequest;
 import com.erebelo.springneo4jdemo.domain.response.UserLazyResponse;
@@ -18,20 +17,20 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository userRepository;
+    private final UserRepository repository;
     private final UserMapper mapper;
 
     @Override
 //    @Transactional(readOnly = true)
     public List<UserLazyResponse> findAll() {
-        var nodeList = userRepository.findAll();
+        var nodeList = repository.findAll();
         return mapper.lazyNodeListToResponseList(nodeList);
     }
 
     @Override
 //    @Transactional(readOnly = true)
     public UserResponse findById(String id) {
-        var node = userRepository.findById(id).orElse(null);
+        var node = repository.findById(id).orElse(null);
         return mapper.nodeToResponse(node);
     }
 
@@ -39,7 +38,7 @@ public class UserServiceImpl implements UserService {
 //    @Transactional
     public UserLazyResponse insert(UserRequest request) {
         var node = mapper.requestToNode(request);
-        node = userRepository.save(node);
+        node = repository.save(node);
 
         return mapper.lazyNodeToResponse(node);
     }
@@ -47,13 +46,13 @@ public class UserServiceImpl implements UserService {
     @Override
 //    @Transactional
     public UserLazyResponse update(String id, UserRequest request) {
-        var node = userRepository.findById(id).orElse(null);
+        var node = repository.findById(id).orElse(null);
 
         if (node != null) {
             node.setUsername(request.getUsername());
             node.setName(request.getName());
 
-            node = userRepository.save(node);
+            node = repository.save(node);
         }
 
         return mapper.lazyNodeToResponse(node);
@@ -62,14 +61,14 @@ public class UserServiceImpl implements UserService {
     @Override
 //    @Transactional
     public void delete(String id) {
-        userRepository.deleteById(id);
+        repository.deleteById(id);
     }
 
     @Override
 //    @Transactional
     public void followUser(String id1, String id2) {
-        var user1 = userRepository.findById(id1).orElse(null);
-        var user2 = userRepository.findById(id2).orElse(null);
+        var user1 = repository.findById(id1).orElse(null);
+        var user2 = repository.findById(id2).orElse(null);
 
         if (user1 != null && user2 != null) {
             var followingRelationship = new FollowRelationship();
@@ -82,23 +81,23 @@ public class UserServiceImpl implements UserService {
             followerRelationship.setUser(user1);
             user2.getFollowers().add(followerRelationship);
 
-            userRepository.save(user1);
-            userRepository.save(user2);
+            repository.save(user1);
+            repository.save(user2);
         }
     }
 
     @Override
 //    @Transactional
     public void unfollowUser(String id1, String id2) {
-        var user1 = userRepository.findById(id1).orElse(null);
-        var user2 = userRepository.findById(id2).orElse(null);
+        var user1 = repository.findById(id1).orElse(null);
+        var user2 = repository.findById(id2).orElse(null);
 
         if (user1 != null && user2 != null) {
             user1.getFollowing().removeIf(rel -> rel.getUser().getId().equals(id2));
             user2.getFollowers().removeIf(rel -> rel.getUser().getId().equals(id1));
 
-            userRepository.save(user1);
-            userRepository.save(user2);
+            repository.save(user1);
+            repository.save(user2);
         }
     }
 }
