@@ -9,6 +9,7 @@ import com.erebelo.springneo4jdemo.repository.UserRepository;
 import com.erebelo.springneo4jdemo.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -21,21 +22,21 @@ public class UserServiceImpl implements UserService {
     private final UserMapper mapper;
 
     @Override
-//    @Transactional(readOnly = true)
+    @Transactional(value = "transactionManager", readOnly = true)
     public List<UserLazyResponse> findAll() {
         var nodeList = repository.findAll();
         return mapper.lazyNodeListToResponseList(nodeList);
     }
 
     @Override
-//    @Transactional(readOnly = true)
+    @Transactional(value = "transactionManager", readOnly = true)
     public UserResponse findById(String id) {
         var node = repository.findById(id).orElse(null);
         return mapper.nodeToResponse(node);
     }
 
     @Override
-//    @Transactional
+    @Transactional("transactionManager")
     public UserLazyResponse insert(UserRequest request) {
         var node = mapper.requestToNode(request);
         node = repository.save(node);
@@ -44,7 +45,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-//    @Transactional
+    @Transactional("transactionManager")
     public UserLazyResponse update(String id, UserRequest request) {
         var node = repository.findById(id).orElse(null);
 
@@ -59,13 +60,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-//    @Transactional
+    @Transactional("transactionManager")
     public void delete(String id) {
         repository.deleteById(id);
     }
 
     @Override
-//    @Transactional
+    @Transactional("transactionManager")
     public void followUser(String id1, String id2) {
         var user1 = repository.findById(id1).orElse(null);
         var user2 = repository.findById(id2).orElse(null);
@@ -87,7 +88,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-//    @Transactional
+    @Transactional("transactionManager")
     public void unfollowUser(String id1, String id2) {
         var user1 = repository.findById(id1).orElse(null);
         var user2 = repository.findById(id2).orElse(null);
