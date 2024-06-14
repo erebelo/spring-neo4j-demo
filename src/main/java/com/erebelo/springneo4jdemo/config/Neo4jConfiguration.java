@@ -62,7 +62,8 @@ public class Neo4jConfiguration extends AbstractNeo4jConfig {
 
         if (sslEnabled && !sslCertPath.isEmpty()) {
             var certFile = new File(sslCertPath);
-            configBuilder.withEncryption().withTrustStrategy(Config.TrustStrategy.trustCustomCertificateSignedBy(certFile));
+            configBuilder.withEncryption()
+                    .withTrustStrategy(Config.TrustStrategy.trustCustomCertificateSignedBy(certFile));
         }
 
         return configBuilder.build();
