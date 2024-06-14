@@ -1,5 +1,6 @@
 package com.erebelo.springneo4jdemo.service.impl;
 
+import com.erebelo.springneo4jdemo.domain.node.UserNode;
 import com.erebelo.springneo4jdemo.domain.relationship.FollowRelationship;
 import com.erebelo.springneo4jdemo.domain.request.UserRequest;
 import com.erebelo.springneo4jdemo.domain.response.UserLazyResponse;
@@ -71,7 +72,7 @@ public class UserServiceImpl implements UserService {
         var user1 = repository.findById(id1).orElse(null);
         var user2 = repository.findById(id2).orElse(null);
 
-        if (user1 != null && user2 != null) {
+        if (user1 != null && user2 != null && !isFollowing(user1, id2)) {
             var followingRelationship = new FollowRelationship();
             followingRelationship.setSinceAt(LocalDateTime.now());
             followingRelationship.setUser(user2);
@@ -84,6 +85,7 @@ public class UserServiceImpl implements UserService {
 
             repository.save(user1);
             repository.save(user2);
+
         }
     }
 
@@ -93,12 +95,17 @@ public class UserServiceImpl implements UserService {
         var user1 = repository.findById(id1).orElse(null);
         var user2 = repository.findById(id2).orElse(null);
 
-        if (user1 != null && user2 != null) {
+        if (user1 != null && user2 != null && isFollowing(user1, id2)) {
             user1.getFollowing().removeIf(rel -> rel.getUser().getId().equals(id2));
             user2.getFollowers().removeIf(rel -> rel.getUser().getId().equals(id1));
 
             repository.save(user1);
             repository.save(user2);
+
         }
+    }
+
+    private boolean isFollowing(UserNode user, String userId2) {
+        return user.getFollowing().stream().anyMatch(rel -> rel.getUser().getId().equals(userId2));
     }
 }
