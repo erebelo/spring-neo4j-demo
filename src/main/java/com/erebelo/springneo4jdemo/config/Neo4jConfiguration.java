@@ -36,7 +36,7 @@ public class Neo4jConfiguration {
     @Value("${database.username:}")
     private String dbUsername;
 
-    @Value("${database.ssl.cert.path:}") // cert.pem file path
+    @Value("${database.ssl.cert.path:}")
     private String sslCertPath;
 
     // Heap memory security breach: do not use @Value annotation to get passwords
