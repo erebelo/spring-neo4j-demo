@@ -1,7 +1,6 @@
 ## Neo4j Server Setup
 
-1. Download and extract [Graph Database Self-Managed](https://neo4j.com/deployment-center/) for Windows by choosing the community option **Windows Executable
-   Neo4j 5.20.0 (zip)**
+1. Download and extract [Graph Database Self-Managed](https://neo4j.com/deployment-center/) by choosing the community option **Neo4j 5.20.0 Released 23 May 2024** for the OS wanted
 
 2. Navigate to _C:\\<NEO4J_PATH>\bin_ directory using Git Bash terminal
 
@@ -46,13 +45,13 @@
 
    **NOTE:** type the domain name (e.g., localhost) when asked to enter the **Common Name (e.g. server FQDN or YOUR name) []**
 
-   `openssl req -new -key key.pem -out csr.pem`
+   `$ openssl req -new -key key.pem -out csr.pem`
 
 6. Generate Self-signed Certificate:
 
-   `openssl x509 -req -days 365 -in csr.pem -signkey key.pem -out cert.pem`
+   `$ openssl x509 -req -days 365 -in csr.pem -signkey key.pem -out cert.pem`
 
-7. Navigate to \_C:\\<NEO4J_PATH>\conf directory
+7. Navigate to _C:\\<NEO4J_PATH>\conf_ directory
 
 8. Edit the **neo4j.conf** file
 
@@ -73,4 +72,4 @@
    dbms.ssl.policy.bolt.client_auth=NONE
    ```
 
-10. Use the cert.pem on the client side (e.g., backend service) to ensure secure communication with the database server by encrypting the data transmitted over the network
+10. Use the _cert.pem_ on the client side (e.g., backend service) to ensure secure communication with the database server by encrypting the data transmitted over the network

@@ -27,19 +27,19 @@ public class Neo4jConfiguration extends AbstractNeo4jConfig {
 
     private final Environment env;
 
-    @Value("${database.host:localhost}")
+    @Value("${database.host}")
     private String dbHost;
 
-    @Value("${database.port:7687}")
+    @Value("${database.port}")
     private String dbPort;
 
-    @Value("${database.name:}")
+    @Value("${database.name}")
     private String dbName;
 
-    @Value("${database.username:}")
+    @Value("${database.username}")
     private String dbUsername;
 
-    @Value("${database.ssl.cert.path:}")
+    @Value("${database.ssl.cert.path}")
     private String sslCertPath;
 
     // Heap memory security breach: do not use @Value annotation to get passwords
