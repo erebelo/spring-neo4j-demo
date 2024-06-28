@@ -73,13 +73,15 @@ public class UserServiceImpl implements UserService {
         var user2 = repository.findById(id2).orElse(null);
 
         if (user1 != null && user2 != null && !isFollowing(user1, id2)) {
+            var localDate = LocalDateTime.now();
+
             var followingRelationship = new FollowRelationship();
-            followingRelationship.setSinceAt(LocalDateTime.now());
+            followingRelationship.setSinceAt(localDate);
             followingRelationship.setUser(user2);
             user1.getFollowing().add(followingRelationship);
 
             var followerRelationship = new FollowRelationship();
-            followerRelationship.setSinceAt(LocalDateTime.now());
+            followerRelationship.setSinceAt(localDate);
             followerRelationship.setUser(user1);
             user2.getFollowers().add(followerRelationship);
 
