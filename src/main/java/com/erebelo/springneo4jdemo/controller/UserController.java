@@ -5,6 +5,7 @@ import com.erebelo.springneo4jdemo.domain.response.UserLazyResponse;
 import com.erebelo.springneo4jdemo.domain.response.UserResponse;
 import com.erebelo.springneo4jdemo.service.UserService;
 import jakarta.validation.Valid;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,8 +20,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("users")
@@ -47,7 +46,8 @@ public class UserController {
     public ResponseEntity<UserLazyResponse> insert(@Valid @RequestBody UserRequest request) {
         LOGGER.info("Inserting user: {}", request);
         var response = service.insert(request);
-        var uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(response.getId()).toUri();
+        var uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(response.getId())
+                .toUri();
         return ResponseEntity.created(uri).body(response);
     }
 

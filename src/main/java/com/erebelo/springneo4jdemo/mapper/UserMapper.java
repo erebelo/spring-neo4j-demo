@@ -1,5 +1,7 @@
 package com.erebelo.springneo4jdemo.mapper;
 
+import static org.mapstruct.ReportingPolicy.WARN;
+
 import com.erebelo.springneo4jdemo.domain.node.TweetNode;
 import com.erebelo.springneo4jdemo.domain.node.UserNode;
 import com.erebelo.springneo4jdemo.domain.relationship.FollowRelationship;
@@ -10,11 +12,8 @@ import com.erebelo.springneo4jdemo.domain.response.PostRelationshipResponse;
 import com.erebelo.springneo4jdemo.domain.response.TweetLazyResponse;
 import com.erebelo.springneo4jdemo.domain.response.UserLazyResponse;
 import com.erebelo.springneo4jdemo.domain.response.UserResponse;
-import org.mapstruct.Mapper;
-
 import java.util.List;
-
-import static org.mapstruct.ReportingPolicy.WARN;
+import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = WARN)
 public interface UserMapper {

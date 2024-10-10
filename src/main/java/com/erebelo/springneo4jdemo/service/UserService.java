@@ -3,7 +3,6 @@ package com.erebelo.springneo4jdemo.service;
 import com.erebelo.springneo4jdemo.domain.request.UserRequest;
 import com.erebelo.springneo4jdemo.domain.response.UserLazyResponse;
 import com.erebelo.springneo4jdemo.domain.response.UserResponse;
-
 import java.util.List;
 
 public interface UserService {

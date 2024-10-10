@@ -1,5 +1,7 @@
 package com.erebelo.springneo4jdemo.config;
 
+import java.io.File;
+import java.util.concurrent.TimeUnit;
 import lombok.RequiredArgsConstructor;
 import org.neo4j.driver.AuthTokens;
 import org.neo4j.driver.Config;
@@ -13,9 +15,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.data.neo4j.config.AbstractNeo4jConfig;
 import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories;
 import org.springframework.util.ObjectUtils;
-
-import java.io.File;
-import java.util.concurrent.TimeUnit;
 
 @Configuration
 @RequiredArgsConstructor
@@ -54,8 +53,7 @@ public class Neo4jConfiguration extends AbstractNeo4jConfig {
     }
 
     protected Config configureEncryptionOptions() {
-        Config.ConfigBuilder configBuilder = Config.builder()
-                .withConnectionTimeout(30, TimeUnit.SECONDS)
+        Config.ConfigBuilder configBuilder = Config.builder().withConnectionTimeout(30, TimeUnit.SECONDS)
                 .withTrustStrategy(Config.TrustStrategy.trustSystemCertificates());
 
         if (!ObjectUtils.isEmpty(sslCertPath)) {
