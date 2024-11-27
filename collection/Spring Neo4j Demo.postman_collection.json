@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "38359e75-1c94-461b-a518-967cfa47ff7d",
+		"_postman_id": "e1515f8d-44f6-45fe-8594-9857148da293",
 		"name": "Spring Neo4j Demo",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "3559566"
+		"_exporter_id": "16363964"
 	},
 	"item": [
 		{
@@ -32,10 +32,10 @@
 			]
 		},
 		{
-			"name": "User",
+			"name": "Users",
 			"item": [
 				{
-					"name": "GET All Users",
+					"name": "GET Users",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -88,6 +88,7 @@
 									"    if (id) {\r",
 									"        pm.environment.set(\"user_id_1\", id);\r",
 									"    } else {\r",
+									"        pm.environment.set(\"user_id_1\", \"\");\r",
 									"        console.log(\"No id retrieved\");\r",
 									"    }\r",
 									"} else {\r",
@@ -139,6 +140,7 @@
 									"    if (id) {\r",
 									"        pm.environment.set(\"user_id_2\", id);\r",
 									"    } else {\r",
+									"        pm.environment.set(\"user_id_2\", \"\")\r",
 									"        console.log(\"No id retrieved\");\r",
 									"    }\r",
 									"} else {\r",

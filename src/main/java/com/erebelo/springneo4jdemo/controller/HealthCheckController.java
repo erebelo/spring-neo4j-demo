@@ -1,22 +1,26 @@
 package com.erebelo.springneo4jdemo.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import static com.erebelo.springneo4jdemo.constant.BusinessConstant.HEALTH_CHECK_PATH;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @RestController
-@RequestMapping("health-check")
+@RequestMapping(HEALTH_CHECK_PATH)
+@Tag(name = "Health Check API")
 public class HealthCheckController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(HealthCheckController.class);
-
+    @Operation(summary = "GET Health Check")
     @GetMapping(produces = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity<String> getHealthCheck() {
-        LOGGER.info("Getting health check");
+        log.info("GET {}", HEALTH_CHECK_PATH);
         return ResponseEntity.ok("Spring Neo4j Demo application is up and running");
     }
 }

@@ -5,14 +5,10 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
-@Getter
-@Setter
-@ToString
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,6 +21,5 @@ public class UserResponse {
     private String name;
     private List<FollowRelationshipResponse> following;
     private List<FollowRelationshipResponse> followers;
-    private List<PostRelationshipResponse> posts;
 
 }

@@ -11,6 +11,12 @@ import org.springframework.data.neo4j.core.schema.RelationshipId;
 import org.springframework.data.neo4j.core.schema.RelationshipProperties;
 import org.springframework.data.neo4j.core.schema.TargetNode;
 
+/**
+ * Avoid using `@Data` here to prevent circular references leading to
+ * `StackOverflowError`.
+ * <p>
+ * `@ToString` is manually * handled to avoid recursion.
+ */
 @Getter
 @Setter
 @Builder
@@ -27,4 +33,15 @@ public class FollowRelationship {
 
     private LocalDateTime sinceAt;
 
+    /**
+     * Override `toString()` to avoid circular reference causing
+     * `StackOverflowError`.
+     * <p>
+     * Print only the username of the `UserNode`.
+     */
+    @Override
+    public String toString() {
+        return "FollowRelationship{" + "id=" + id + ", user=" + (user != null ? user.getUsername() : "null")
+                + ", sinceAt=" + sinceAt + '}';
+    }
 }

@@ -17,8 +17,8 @@ public interface UserService {
 
     void delete(String id);
 
-    void followUser(String id1, String id2);
+    void followUser(String fromId, String toId);
 
-    void unfollowUser(String id1, String id2);
+    void unfollowUser(String fromId, String toId);
 
 }
