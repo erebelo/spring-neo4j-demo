@@ -9,6 +9,7 @@ import com.erebelo.springneo4jdemo.domain.response.UserLazyResponse;
 import com.erebelo.springneo4jdemo.domain.response.UserResponse;
 import com.erebelo.springneo4jdemo.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +30,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 @RestController
 @RequestMapping(USERS_PATH)
 @RequiredArgsConstructor
+@Tag(name = "Users API")
 public class UserController {
 
     private final UserService service;
