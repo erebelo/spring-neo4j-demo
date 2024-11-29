@@ -1,10 +1,9 @@
 package com.erebelo.springneo4jdemo.constant;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
+import lombok.experimental.UtilityClass;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-public final class BusinessConstant {
+@UtilityClass
+public class BusinessConstant {
 
     public static final String HEALTH_CHECK_PATH = "/health-check";
     public static final String USERS_PATH = "/users";
