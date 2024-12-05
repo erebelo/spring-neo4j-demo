@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
         log.info("Fetching user by id: {}", id);
         var node = repository.findById(id).orElse(null);
 
-        log.info("User {} successfully retrieved", node);
+        log.info("User successfully retrieved: {}", node);
         return mapper.nodeToResponse(node);
     }
 
