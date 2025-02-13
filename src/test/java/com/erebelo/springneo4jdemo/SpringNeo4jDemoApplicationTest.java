@@ -24,7 +24,7 @@ class SpringNeo4jDemoApplicationTest {
     }
 
     @Test
-    void mainRunSuccessfully() {
+    void mainRunSuccessful() {
         try (MockedStatic<SpringApplication> mockedStatic = mockStatic(SpringApplication.class)) {
             mockedStatic.when(() -> SpringApplication.run(any(Class.class), any(String[].class)))
                     .thenReturn(contextMock);
