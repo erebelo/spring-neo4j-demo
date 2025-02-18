@@ -48,7 +48,7 @@ public class Neo4jConfiguration extends AbstractNeo4jConfig {
 
     @Bean
     public Driver driver() {
-        var uri = String.format(CONNECTION_STRING_TEMPLATE, dbHost, dbPort, dbName);
+        String uri = String.format(CONNECTION_STRING_TEMPLATE, dbHost, dbPort, dbName);
         return GraphDatabase.driver(uri, AuthTokens.basic(dbUsername, getDbPassword()), configureEncryptionOptions());
     }
 
