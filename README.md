@@ -8,6 +8,10 @@ REST API project developed in Java using Spring Boot 3 and Neo4j graph database.
 - Spring Boot 3.x.x
 - Apache Maven 3.8.6
 
+## Libraries
+
+- [spring-common-parent](https://github.com/erebelo/spring-common-parent): Manages the Spring Boot version and provide common configurations for plugins and formatting.
+
 ## Configuring Maven for GitHub Dependencies
 
 To pull the `spring-common-parent` dependency, follow these steps:
@@ -16,10 +20,10 @@ To pull the `spring-common-parent` dependency, follow these steps:
 
    Go to your GitHub account -> **Settings** -> **Developer settings** -> **Personal access tokens** -> **Tokens (classic)** -> **Generate new token (classic)**:
 
-  - Fill out the **Note** field: `Pull packages`.
-  - Set the scope:
+- Fill out the **Note** field: `Pull packages`.
+- Set the scope:
     - `read:packages` (to download packages)
-  - Click **Generate token**.
+- Click **Generate token**.
 
 2. **Set Up Maven Authentication**:
 
@@ -36,10 +40,6 @@ To pull the `spring-common-parent` dependency, follow these steps:
    ```
 
    **NOTE**: Replace `USERNAME` with your GitHub username and `TOKEN` with the personal access token you just generated.
-
-## Libraries
-
-- [spring-common-parent](https://github.com/erebelo/spring-common-parent): Manages the Spring Boot version and provide common configurations for plugins and formatting.
 
 ## Run App
 
